@@ -1,4 +1,4 @@
-package org.example.examenfx;
+package org.example.examenfx.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,65 +8,43 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.examenfx.model.Usuario;
 import org.example.examenfx.utils.JavaFXUtil;
 
-/**
- * Controlador principal para la vista de la aplicación. Gestiona la interacción del usuario
- * con la interfaz, incluyendo la adición de usuarios y la visualización de sus detalles.
- */
 public class HelloController {
 
-    // --- Componentes de la Interfaz de Usuario (inyectados desde FXML) ---
-
-    /** Botón para añadir un nuevo usuario a la tabla. */
     @FXML
     private Button botonAñadir;
-
-    /** ComboBox para seleccionar la plataforma del usuario. */
     @FXML
     private ComboBox<String> ComboBox;
-
-    /** Campo de texto para introducir el correo del usuario. */
     @FXML
     private TextField CampoCorreo;
-
-    /** CheckBox para indicar si el usuario es administrador. */
     @FXML
     private CheckBox CheckAdministrador;
 
-    /** Columna de la tabla para mostrar el correo del usuario. */
+
     @FXML
     private TableColumn<Usuario, String> columnaCorreo;
-
-    /** Columna de la tabla para mostrar la plataforma del usuario. */
     @FXML
     private TableColumn<Usuario, String> columnaPlataforma;
-
-    /** Columna de la tabla para mostrar si el usuario es administrador. */
     @FXML
     private TableColumn<Usuario, Boolean> columnaAdministrador;
 
-    /** Tabla principal que muestra la lista de usuarios. */
+
     @FXML
     private TableView<Usuario> tablaUsuarios;
 
-    /** Botón para borrar todos los usuarios de la tabla. */
+    private ObservableList<Usuario> listaUsuarios;
     @FXML
     private Button BotonBorrar;
 
-    /** Lista observable que contiene los datos de los usuarios mostrados en la tabla. */
-    private ObservableList<Usuario> listaUsuarios;
 
-    /**
-     * Método que se ejecuta automáticamente al cargar el FXML.
-     * Inicializa los componentes, configura las columnas de la tabla,
-     * establece los listeners para los botones y la selección de la tabla.
-     */
     public void initialize(){
         listaUsuarios = FXCollections.observableArrayList();
         tablaUsuarios.setItems(listaUsuarios);
 
+
         columnaCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         columnaPlataforma.setCellValueFactory(new PropertyValueFactory<>("plataforma"));
         columnaAdministrador.setCellValueFactory(new PropertyValueFactory<>("administrador"));
+
 
         ComboBox.getItems().addAll("Windows","Linux","MacOS");
         ComboBox.setValue("Windows");
@@ -89,6 +67,7 @@ public class HelloController {
             CheckAdministrador.setSelected(false);
         });
 
+
         BotonBorrar.setOnAction(e->{
             listaUsuarios.clear();
         });
@@ -100,17 +79,11 @@ public class HelloController {
         });
     }
 
-    /**
-     * Muestra una ventana modal con los detalles de un usuario específico.
-     * @param usuario El objeto Usuario del que se mostrarán los detalles.
-     */
     private void mostrarDetallesUsuario(Usuario usuario) {
-        // Construir el mensaje con los detalles del usuario
         String detalles = "Correo: " + usuario.getCorreo() + "\n" +
                           "Plataforma: " + usuario.getPlataforma() + "\n" +
                           "Es Administrador: " + (usuario.getAdministrador() ? "Sí" : "No");
 
-        // Usar la utilidad para mostrar el modal de información
         JavaFXUtil.showModal(Alert.AlertType.INFORMATION, "Detalles del Usuario", "Información del usuario seleccionado:", detalles);
     }
 }

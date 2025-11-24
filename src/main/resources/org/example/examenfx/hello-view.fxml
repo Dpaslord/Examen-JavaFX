@@ -1,16 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.examenfx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" prefHeight="419.0" prefWidth="811.0" spacing="20.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examenfx.controller.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <TableView fx:id="tablaUsuarios" prefHeight="292.0" prefWidth="382.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="columnaCorreo" prefWidth="75.0" text="Correo" />
+                <TableColumn fx:id="columnaPlataforma" prefWidth="95.0" text="Plataforma" />
+                  <TableColumn fx:id="columnaAdministrador" prefWidth="111.0" text="Administrador" />
+              </columns>
+            </TableView>
+         </center>
+         <right>
+            <AnchorPane prefHeight="292.0" prefWidth="285.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="32.0" layoutY="54.0" text="Correo:" />
+                  <Label layoutX="32.0" layoutY="117.0" text="Plataforma:" />
+                  <Label layoutX="31.0" layoutY="14.0" prefHeight="28.0" prefWidth="133.0" text="Añadir Usuario">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="ComboBox" layoutX="31.0" layoutY="152.0" prefWidth="150.0" />
+                  <TextField fx:id="CampoCorreo" layoutX="30.0" layoutY="80.0" />
+                  <CheckBox fx:id="CheckAdministrador" layoutX="30.0" layoutY="205.0" mnemonicParsing="false" text="Es administrador" />
+                  <Button fx:id="botonAñadir" layoutX="32.0" layoutY="262.0" mnemonicParsing="false" text="Añadir" />
+               </children>
+            </AnchorPane>
+         </right>
+      </BorderPane>
+      <Button fx:id="BotonBorrar" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" text="Borrar todo" />
+   </children>
 </VBox>
